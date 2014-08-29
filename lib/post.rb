@@ -1,5 +1,6 @@
 class Post
   ATTRIBUTES = [:state, :tags, :tweet, :date, :format, :slug, :title, :body]
+
   attr_accessor :type   # String  [text, photo, quote, link, chat, audio, video]
   attr_accessor :state  # String  [published, draft, queue, private]
   attr_accessor :tags   # Array   [Comma-separated tags for this post]
@@ -21,6 +22,7 @@ class Post
   end
 
   private
+
   def tags_to_request_param
     tags.to_a.join(', ')
   end
