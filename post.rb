@@ -1,5 +1,6 @@
 require 'bundler/setup'
 Bundler.require
+Dotenv.load
 require_relative './lib/post'
 
 Tumblr.configure do |config|
