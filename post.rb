@@ -2,6 +2,7 @@ require 'bundler/setup'
 Bundler.require
 Dotenv.load
 require_relative './lib/post'
+require_relative './lib/blog_hu_parser'
 
 Tumblr.configure do |config|
   config.consumer_key       = ENV['CONSUMER_KEY']
@@ -10,17 +11,12 @@ Tumblr.configure do |config|
   config.oauth_token_secret = ENV['OAUTH_TOKEN_SECRET']
 end
 
-post = Post.new.tap do |p|
-  p.type  = 'text'
-  p.state = 'published'
-  p.tags  = ['one', 'two', 'three']
-  p.tweet = false
-  p.date  = Time.new(2014, 7, 30, 2, 2, 2, '+02:00')
-  p.format = 'html'
-  p.slug = 'whatever'
-  p.title = 'Something'
-  p.body = 'Text <br> and a <p>one</p> <marquee>blink and scroll</marquee>'
-end
+# TODO : filename arg to script
+posts = BlogHuParser.posts_from File.join(File.dirname(__FILE__), "spec/fixtures/bloghu_digitalnatives_2014_07_10.xml")
 
 client = Tumblr::Client.new
-client.create_post(:text, 'dnfakeblog.tumblr.com', post.to_request_params)
+
+# TODO : destination config
+posts.each do |p|
+  client.create_post(:text, 'dnfakeblog.tumblr.com', p.to_request_params)
+end

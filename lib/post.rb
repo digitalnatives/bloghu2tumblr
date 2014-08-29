@@ -1,15 +1,41 @@
-class Post
+require 'ostruct'
+
+class Post < OpenStruct
   ATTRIBUTES = [:state, :tags, :tweet, :date, :format, :slug, :title, :body]
 
-  attr_accessor :type   # String  [text, photo, quote, link, chat, audio, video]
-  attr_accessor :state  # String  [published, draft, queue, private]
-  attr_accessor :tags   # Array   [Comma-separated tags for this post]
-  attr_accessor :tweet  # Boolean [off to disable auto tweeting]
-  attr_accessor :date   # Time    [The GMT date and time of the post, as a string]
-  attr_accessor :format # String  [html, markdown]
-  attr_accessor :slug   # String
-  attr_accessor :title  # String
-  attr_accessor :body   # String
+  # type   # String  [text, photo, quote, link, chat, audio, video]
+  # state  # String  [published, draft, queue, private]
+  # tags   # Array   [Comma-separated tags for this post]
+  # tweet  # Boolean [off to disable auto tweeting]
+  # date   # Time    [The GMT date and time of the post, as a string]
+  # format # String  [html, markdown]
+  # slug   # String
+  # title  # String
+  # body   # String
+
+  def self.from_xml_element(xml_elem)
+    p_state = case xml_elem.xpath('wp:status').first.children.text
+              when 'draft' then 'draft'
+              when 'publish' then 'published'
+              else 'private'
+              end
+
+    p_tags  = xml_elem.xpath('category[@domain="tag"]').map{ |e| e.children.text }
+    p_date  = Time.parse(xml_elem.xpath('wp:post_date_gmt').first.children.text)
+    p_slug  = xml_elem.xpath('wp:post_name').first.children.text
+    p_title = xml_elem.xpath('title').first.children.text
+    p_body  = xml_elem.xpath('content:encoded').first.children.text
+
+    new type: 'text',
+        state: p_state,
+        tags: p_tags,
+        tweet: false,
+        date: p_date,
+        format: 'html',
+        slug: p_slug,
+        title: p_title,
+        body: p_body
+  end
 
   def to_request_params
     ATTRIBUTES.each_with_object({}) do |attr, hash|
