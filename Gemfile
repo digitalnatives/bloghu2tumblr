@@ -1,7 +1,16 @@
 source "https://rubygems.org"
 
-gem 'tumblr_client'
 gem 'dotenv'
+
+gem 'tumblr_client'
 gem 'nokogiri'
 
-gem 'rspec'
+gem 'sinatra'
+gem 'omniauth-tumblr'
+gem 'multi_json'
+
+gem 'rspec', group: :test
+group :development do
+  gem 'shotgun'
+  gem 'pry'
+end
