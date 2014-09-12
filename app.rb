@@ -13,9 +13,14 @@ class MigratorJob
 end
 
 class App < Sinatra::Base
+  register Sinatra::AssetPack
   use Rack::Session::Cookie
   use OmniAuth::Builder do
     provider :tumblr, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
+  end
+
+  assets do
+    serve '/css', :from => 'public/stylesheets'
   end
 
   get '/' do
