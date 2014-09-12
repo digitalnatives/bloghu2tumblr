@@ -8,6 +8,7 @@ $redis = Redis.new
 
 class MigratorJob
   include Sidekiq::Worker
+  include SidekiqStatus::Worker
 
   def perform(token, secret, blog_name, file_path)
     posts = BlogHuParser.posts_from(file_path)
@@ -19,11 +20,13 @@ class MigratorJob
       oauth_token_secret: secret
     )
 
-    posts.each do |p|
-      puts "#{p.to_request_params}"
+    self.total = posts.count
+    posts.each_with_index do |post, post_index|
+      at post_index
+      puts "#{post.to_request_params}"
       client.create_post(:text,
                          "#{blog_name}.tumblr.com",
-                         p.to_request_params
+                         post.to_request_params
                         )
     end
   end
