@@ -1,4 +1,6 @@
 require 'bundler/setup'
+require_relative './lib/post'
+require_relative './lib/blog_hu_parser'
 Bundler.require(:default, :development)
 Dotenv.load
 
@@ -8,7 +10,22 @@ class MigratorJob
   include Sidekiq::Worker
 
   def perform(token, secret, blog_name, file_path)
-    puts token, secret, blog_name, file_path
+    posts = BlogHuParser.posts_from(file_path)
+
+    client = Tumblr::Client.new(
+      consumer_key: ENV['CONSUMER_KEY'],
+      consumer_secret: ENV['CONSUMER_SECRET'],
+      oauth_token: token,
+      oauth_token_secret: secret
+    )
+
+    posts.each do |p|
+      puts "#{p.to_request_params}"
+      client.create_post(:text,
+                         "#{blog_name}.tumblr.com",
+                         p.to_request_params
+                        )
+    end
   end
 end
 
