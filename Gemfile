@@ -9,6 +9,7 @@ gem 'sidekiq'
 gem 'rack'
 gem 'sinatra'
 gem 'sinatra-assetpack'
+gem 'sass'
 gem 'omniauth-tumblr'
 gem 'multi_json'
 

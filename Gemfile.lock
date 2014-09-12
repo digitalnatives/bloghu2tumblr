@@ -60,6 +60,7 @@ GEM
     rspec-mocks (3.0.4)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.4)
+    sass (3.2.19)
     shotgun (0.9)
       rack (>= 1.0)
     sidekiq (3.2.3)
@@ -103,6 +104,7 @@ DEPENDENCIES
   pry
   rack
   rspec
+  sass
   shotgun
   sidekiq
   sinatra

@@ -86,16 +86,20 @@ html, body {
   height: 85%;
   text-align: center;
   .start_button{
-    background: url('../img/start.png');
-    padding: 1%;
+    background: url("../images/start.png");
     position: relative;
-    top: 50%;
+    display: inline-block;
+    width: 17%;
+    height: 21%;
+    top: 20em;
+    border-radius: 20px;
+    box-shadow: 5px 2px 4px rgb(187, 187, 187);
   }
 }
 
 
 .secondpage-background{
-  background: url('../img/background.png');
+  background: url('../images/background.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

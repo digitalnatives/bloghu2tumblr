@@ -1,4 +1,5 @@
 require 'bundler/setup'
+require 'sass'
 Bundler.require(:default, :development)
 Dotenv.load
 
@@ -21,10 +22,18 @@ class App < Sinatra::Base
 
   assets do
     serve '/css', :from => 'public/stylesheets'
+    css :application, [
+      '/css/gumby.css',
+      '/css/style.css',
+    ]
   end
 
   get '/' do
     erb :index
+  end
+
+  get '/start' do
+    erb :upload
   end
 
   get '/auth/tumblr/callback' do
