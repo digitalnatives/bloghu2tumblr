@@ -6,9 +6,24 @@ Dotenv.load
 
 $redis = Redis.new
 
+Sidekiq.configure_client do |config|
+  config.client_middleware do |chain|
+    chain.add Sidekiq::Status::ClientMiddleware
+  end
+end
+
+Sidekiq.configure_server do |config|
+  config.server_middleware do |chain|
+    chain.add Sidekiq::Status::ServerMiddleware, expiration: 30 * 60 # default
+  end
+  config.client_middleware do |chain|
+    chain.add Sidekiq::Status::ClientMiddleware
+  end
+end
+
 class MigratorJob
   include Sidekiq::Worker
-  include SidekiqStatus::Worker
+  include Sidekiq::Status::Worker
 
   def perform(token, secret, blog_name, file_path)
     posts = BlogHuParser.posts_from(file_path)
@@ -20,7 +35,7 @@ class MigratorJob
       oauth_token_secret: secret
     )
 
-    self.total = posts.count
+    total posts.count
     posts.each_with_index do |post, post_index|
       at post_index
       puts "#{post.to_request_params}"
