@@ -9,6 +9,7 @@ gem 'sidekiq-status', github: 'utgarda/sidekiq-status'
 
 gem 'rack'
 gem 'sinatra'
+gem 'sinatra-contrib'
 gem 'omniauth-tumblr'
 gem 'multi_json'
 

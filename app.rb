@@ -3,6 +3,7 @@ require_relative './lib/post'
 require_relative './lib/blog_hu_parser'
 Bundler.require(:default, :development)
 Dotenv.load
+require "sinatra/json"
 
 $redis = Redis.new
 
@@ -37,7 +38,7 @@ class MigratorJob
 
     total posts.count
     posts.each_with_index do |post, post_index|
-      at post_index
+      at post_index + 1
       puts "#{post.to_request_params}"
       client.create_post(:text,
                          "#{blog_name}.tumblr.com",
@@ -68,17 +69,29 @@ class App < Sinatra::Base
   end
 
   post '/upload' do
-    MigratorJob.perform_async(
+    job_id = MigratorJob.perform_async(
       session[:tumblr_token],
       session[:tumblr_secret],
       params[:blog_name],
       params[:source_file][:tempfile].path
     )
 
-    redirect to('/migrate')
+    redirect to("/migrate/#{job_id}")
   end
 
-  get '/migrate' do
+  get '/migrate/:job_id' do |job_id|
+    if request.xhr?
+      # {status: 'complete', update_time: 1360006573, vino: 'veritas'}
+      data = Sidekiq::Status::get_all(job_id)
 
+      percentage = Sidekiq::Status::pct_complete(job_id)
+      json data.merge({
+        at: Sidekiq::Status::at(job_id),
+        total: Sidekiq::Status::total(job_id),
+        progress: percentage.nan? ? 0 : percentage,
+      })
+    else
+      erb :migrate
+    end
   end
 end
