@@ -93,16 +93,41 @@ html, body {
     height: 21%;
     top: 20em;
     border-radius: 20px;
+    background-position: center;
     box-shadow: 5px 2px 4px rgb(187, 187, 187);
   }
 }
 
 
-.secondpage-background{
-  background: url('../images/background.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  position: relative;
+.second-page{
+  height:100%;
+  .content{
+    background: url('../images/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    position: relative;
+    height: 85%;
+  }
+  form{
+    background: rgba(16, 16, 17, 0.5);
+    width: 30%;
+    position: relative;
+    left: 35%;
+    top: 20%;
+    border-radius: 20px;
+    padding: 25px;
+    color: white;
+    box-shadow: 3px 4px 4px black;
+    input[type=submit]{
+      position: relative;
+      top: 20px;
+      padding: 15px;
+      border-radius: 13px;
+      background: rgba(120, 180, 80,0.7);
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
 }
