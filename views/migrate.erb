@@ -1,0 +1,20 @@
+<div id="status">
+</div>
+
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+  // at: 67message: ""progress: 98.52941176470588status: "complete"total: 68update_time: "1411117728"
+  var polling = function() {
+    $.getJSON(window.location.toString(), function(json){
+      $('#status').html(JSON.stringify(json));
+
+      if(json['status'] != 'complete') {
+        setTimeout(polling, 1000);
+      }
+    });
+  };
+
+  polling();
+</script>
+
