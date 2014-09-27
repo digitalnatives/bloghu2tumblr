@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem 'dotenv'
 
+gem 'virtus'
 gem 'tumblr_client'
 gem 'nokogiri'
 gem 'sidekiq'#, '~> 2.3.3'

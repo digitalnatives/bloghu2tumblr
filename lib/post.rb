@@ -1,17 +1,20 @@
-require 'ostruct'
+require 'virtus'
 
-class Post < OpenStruct
-  ATTRIBUTES = [:state, :tags, :tweet, :date, :format, :slug, :title, :body]
+class Post
+  include Virtus.value_object
+  ATTRIBUTES = [:type, :state, :tags, :tweet, :date, :format, :slug, :title, :body]
 
-  # type   # String  [text, photo, quote, link, chat, audio, video]
-  # state  # String  [published, draft, queue, private]
-  # tags   # Array   [Comma-separated tags for this post]
-  # tweet  # Boolean [off to disable auto tweeting]
-  # date   # Time    [The GMT date and time of the post, as a string]
-  # format # String  [html, markdown]
-  # slug   # String
-  # title  # String
-  # body   # String
+  values do
+    attribute :title,  String
+    attribute :date,   Time                        # [The GMT date and time of the post, as a string]
+    attribute :slug,   String
+    attribute :body,   String
+    attribute :tags,   Array                       # [Comma-separated tags for this post]
+    attribute :state,  String,  default: 'private' # [published, draft, queue, private]
+    attribute :type,   String,  default: 'text'    # [text, photo, quote, link, chat, audio, video]
+    attribute :format, String,  default: 'html'    # [html, markdown]
+    attribute :tweet,  Boolean, default: false     # [off to disable auto tweeting]
+  end
 
   def self.from_xml_element(xml_elem)
     p_state = case xml_elem.xpath('wp:status').first.children.text
@@ -38,9 +41,9 @@ class Post < OpenStruct
   end
 
   def to_request_params
-    ATTRIBUTES.each_with_object({}) do |attr, hash|
+    attribute_names.each_with_object({}) do |attr, hash|
       attr_method_name = "#{attr}_to_request_param"
-      attr_method      = respond_to?(attr_method_name) ? attr_method_name : attr
+      attr_method      = respond_to?(attr_method_name, :private) ? attr_method_name : attr
 
       value = send(attr_method)
       hash[attr] = value if value
@@ -58,6 +61,10 @@ class Post < OpenStruct
   end
 
   def date_to_request_param
-    date.to_s
+    date.utc.to_s
+  end
+
+  def attribute_names
+    self.class.attribute_set.map(&:name)
   end
 end
