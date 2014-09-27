@@ -1,8 +1,6 @@
-require 'spec_helper'
+require 'post'
 
 describe Post do
-
-
   context "has attributes" do
     subject { Post.new }
     it { subject.respond_to?(:type) }

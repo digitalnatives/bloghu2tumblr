@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'post'
+require 'blog_hu_parser'
 
 describe BlogHuParser do
   let(:xml_file) { File.join(File.dirname(__FILE__), "fixtures/bloghu_digitalnatives_2014_07_10.xml") }
