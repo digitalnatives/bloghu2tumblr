@@ -1,8 +1,9 @@
+$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require 'bundler/setup'
-require_relative './lib/post'
-require_relative './lib/blog_hu_parser'
 Bundler.require(:default, ENV.fetch('RACK_ENV') { 'development' })
 Dotenv.load
+
+require 'blog_hu_parser'
 require "sinatra/json"
 
 $redis = Redis.new
@@ -49,8 +50,8 @@ class MigratorJob
 end
 
 class App < Sinatra::Base
-  use Rack::Session::Cookie secret: ENV.fetch('COOKIE_SECRET'),
-                            expire_after: 3600
+  use Rack::Session::Cookie, secret: ENV.fetch('COOKIE_SECRET'),
+                             expire_after: 3600
   use OmniAuth::Builder do
     provider :tumblr, ENV.fetch('CONSUMER_KEY'), ENV.fetch('CONSUMER_SECRET')
   end

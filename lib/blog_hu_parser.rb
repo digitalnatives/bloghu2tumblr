@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'post'
 
 class BlogHuParser
 

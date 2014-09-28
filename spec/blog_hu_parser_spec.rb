@@ -1,4 +1,4 @@
-require 'post'
+require 'app_helper'
 require 'blog_hu_parser'
 
 describe BlogHuParser do
