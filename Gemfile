@@ -25,4 +25,5 @@ end
 group :test do
   gem 'rspec'
   gem 'fuubar', require: false
+  gem 'codeclimate-test-reporter', require: false
 end
