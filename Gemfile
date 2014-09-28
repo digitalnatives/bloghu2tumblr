@@ -2,6 +2,7 @@ ruby '2.1.0', engine: 'rbx', engine_version: '2.2.10'
 source "https://rubygems.org"
 
 gem 'dotenv'
+gem 'puma', '~> 2.0'
 
 gem 'virtus'
 gem 'tumblr_client'
@@ -16,11 +17,11 @@ gem 'omniauth-tumblr'
 gem 'multi_json'
 
 gem 'rake'
+gem 'pry', group: %w(development test), require: false
 
 group :development do
   gem 'foreman'
   gem 'shotgun'
-  gem 'pry'
 end
 
 group :test do
@@ -28,5 +29,4 @@ group :test do
   gem 'factory_girl', '~> 4.0'
   gem 'fuubar', require: false
   gem 'codeclimate-test-reporter', require: false
-  gem 'pry', require: false
 end
