@@ -1,7 +1,7 @@
 require 'bundler/setup'
 require_relative './lib/post'
 require_relative './lib/blog_hu_parser'
-Bundler.require(:default, :development)
+Bundler.require(:default, ENV.fetch('RACK_ENV') { 'development' })
 Dotenv.load
 require "sinatra/json"
 
@@ -49,9 +49,10 @@ class MigratorJob
 end
 
 class App < Sinatra::Base
-  use Rack::Session::Cookie
+  use Rack::Session::Cookie secret: ENV.fetch('COOKIE_SECRET'),
+                            expire_after: 3600
   use OmniAuth::Builder do
-    provider :tumblr, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
+    provider :tumblr, ENV.fetch('CONSUMER_KEY'), ENV.fetch('CONSUMER_SECRET')
   end
 
   get '/' do
