@@ -14,6 +14,8 @@ gem 'sinatra-contrib'
 gem 'omniauth-tumblr'
 gem 'multi_json'
 
+gem 'rake'
+
 group :development do
   gem 'foreman'
   gem 'shotgun'
