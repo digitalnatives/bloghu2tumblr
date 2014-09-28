@@ -2,7 +2,6 @@ require 'virtus'
 
 class Post
   include Virtus.value_object
-  ATTRIBUTES = [:type, :state, :tags, :tweet, :date, :format, :slug, :title, :body]
 
   values do
     attribute :title,  String
@@ -18,13 +17,13 @@ class Post
 
   def self.from_xml_element(xml_elem)
     p_state = case xml_elem.xpath('wp:status').first.children.text
-              when 'draft' then 'draft'
+              when 'draft'   then 'draft'
               when 'publish' then 'published'
               else 'private'
               end
 
     p_tags  = xml_elem.xpath('category[@domain="tag"]').map{ |e| e.children.text }
-    p_date  = Time.parse(xml_elem.xpath('wp:post_date_gmt').first.children.text)
+    p_date  = Time.parse(xml_elem.xpath('wp:post_date_gmt').first.children.text + ' UTC')
     p_slug  = xml_elem.xpath('wp:post_name').first.children.text
     p_title = xml_elem.xpath('title').first.children.text
     p_body  = xml_elem.xpath('content:encoded').first.children.text
