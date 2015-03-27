@@ -1,0 +1,87 @@
+html, body {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  background: #fc0;
+  font-size: 15px;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 2rem;
+  background: #eee;
+  padding: 1rem;
+  border-bottom: 0.5rem solid #ccc;
+  border-top: 5px dashed #669;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+@media only screen and (min-width : 480px) {
+  html, body {
+    font-size: 16px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (min-width : 768px) {
+  html, body {
+    font-size: 17px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media only screen and (min-width : 992px) {
+  html, body {
+    font-size: 18px;
+  }
+  
+  h1 {
+    font-size: 3rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width : 1200px) {
+  h1 {
+    font-size: 4rem;
+  }
+}
+
+p, ol {
+  font-size: 1rem;
+  line-height: 1.7rem;
+}
+
+.fa-arrow-right {
+  color: #aaa;
+}
+
+.fa-cogs {
+  color: #666;
+}
+
+li {
+  font-size: 1.3rem;
+  line-height: 2.1rem;
+}
+
+.steps {
+  font-family: Georgia, serif;
+  font-style: italic;
+}
