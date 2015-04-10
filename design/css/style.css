@@ -89,3 +89,24 @@ li {
 form button {
   margin: 1em 0;
 }
+
+.progress {
+  border: 2px solid #666;
+  height: auto;
+}
+
+.progress div {
+  background-color: #aaa;
+  background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
+  linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%);
+  background-size: 13px, 29px, 37px, 53px;
+  width: 77%;
+  text-align: right;
+  color: #fff;
+  text-shadow: 2px 1px 1px #111;
+  font-weight: bold;
+  font-size: 24px;
+  padding-right: 10px;
+}
