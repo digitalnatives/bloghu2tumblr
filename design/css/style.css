@@ -85,3 +85,7 @@ li {
   font-family: Georgia, serif;
   font-style: italic;
 }
+
+form button {
+  margin: 1em 0;
+}
