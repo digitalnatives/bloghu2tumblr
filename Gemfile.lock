@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/utgarda/sidekiq-status.git
-  revision: a581af9f12cf813be8f24a1fc1c83ee45b431d64
+  revision: 3a1794992fc24177ae740921736a5f5be31fb055
   specs:
-    sidekiq-status (0.5.1)
+    sidekiq-status (0.5.2)
       sidekiq (>= 2.7, < 3.4)
 
 GEM
@@ -18,7 +18,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    backports (3.6.0)
+    backports (3.6.4)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     codeclimate-test-reporter (0.4.1)

@@ -1,4 +1,4 @@
-ruby '2.1.0', engine: 'rbx', engine_version: '2.2.10'
+ruby '2.1.5'
 source "https://rubygems.org"
 
 gem 'dotenv'
