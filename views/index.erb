@@ -17,8 +17,26 @@
     <input type='submit' value='Submit' />
   </form>
 <% else %>
-  <a href="/auth/tumblr">Authorize with Tumblr</a>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <h2><i class="fa fa-question-circle"></i> Mi ez?</h2>
+        <p>Fusce congue ornare purus sit amet convallis. Nam lacinia purus libero, vitae rhoncus justo ultrices eu. Donec elementum dui at eros scelerisque, at egestas urna dictum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque odio tortor, facilisis quis interdum sed, ultrices non dui. Maecenas auctor, dui a aliquet rhoncus, augue erat varius justo, sed luctus magna augue eu tellus. Sed laoreet tincidunt malesuada. Aenean ultrices efficitur sollicitudin. Morbi consequat risus quis lacus tempus porttitor. Fusce aliquam eget neque at ultrices. Aenean libero lectus, accumsan eget imperdiet id, pulvinar ac nunc. Aliquam lacinia ante ut neque finibus egestas. Cras a lobortis velit. Nunc imperdiet justo et lacinia cursus.</p>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <h2><i class="fa fa-cog"></i> Hogyan működik?</h2>
+        <ol>
+          <li>earum labore fuga quae delectus animi asperiores</li>
+          <li>doloremque eligendi tenetur </li>
+          <li>ipsum dolor sit amet, consectetur</li>
+        </ol>
+        <p>
+          In elit nisi, consequat eu efficitur sit amet, lacinia eu lorem.
+          Praesent bibendum facilisis semper. Curabitur rhoncus scelerisque
+          turpis et rutrum. Pellentesque habitant morbi tristique senectus et
+          netus et malesuada fames ac turpis egestas. Nulla ut commodo felis.
+          Quisque nisi nisl, dignissim ut urna at, pellentesque porttitor erat.
+        </p>
+        <p><a href="/auth/tumblr">Authorize with Tumblr</a></p>
+      </div>
+    </div>
 <% end %>
-
-<hr>
-<pre><%= session.inspect %></pre>
